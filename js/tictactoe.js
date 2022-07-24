@@ -13,12 +13,12 @@ function placeXOrO(squareNumber) {
     let select = document.getElementById(squareNumber);
     //This condition checks who's turn it is.
     if (activePlayer === 'X'){
-        //If activePlayer is equal to 'X', the x.png is placed in HTML
-        select.style.backgroundImage = 'url("images/x.png")';
+        //If activePlayer is equal to 'X', the x_1.png is placed in HTML
+        select.style.backgroundImage = 'url("images/x_1.png")';
         //Active player may only be 'X' or 'O'so, if not 'X' it must be 'O'
     } else {
-        //If active player is equal to 'O', the o.png is placed in HTML
-        select.style.backgroundImage = 'url("images/o.png")';
+        //If active player is equal to 'O', the O_1.jpg is placed in HTML
+        select.style.backgroundImage = 'url("images/O_1.jpg")';
     }
     //squareNumber and activePlayer are concactenated together and added to an array.
     selectedSquares.push(squareNumber + activePlayer);
@@ -35,7 +35,7 @@ function placeXOrO(squareNumber) {
     }
 
     //This function plays placement sound.
-    audio('./media/place.mp3;');
+    audio('./Media/pop_place.mp3');
     //This condition checks to see if it is the computers turn.
     if (activePlayer === 'O') {
         //this function disables clicking for computers turn.
@@ -112,7 +112,7 @@ else if (arrayIncludes('0O', '4O', '8O')) {drawWinLine(100, 100, 520, 520)
 //This condition checks for a tie. If none of the above conditions are met and //9 squares are selected the code excecutes. 
 else if (selectedSquares.length >= 9) {
     //this function plays the time game sound.
-    audio('./media/tie.mp3');
+    audio('./Media/ugh_tie.mp3');
     //this function sets a .3 second timer before the resetGame is called.
     setTimeout(function () {resetGame(); }, 500);
 }
@@ -140,16 +140,16 @@ function disableClick() {
 }
 
 //This function takes a string parameter of the path you set earlier for
-//placement sound ('/media/place.mp3)
+//placement sound ('/Media/pop_place.mp3)
 function audio(audioURL) {
     //We create a new audio object and we pass the path as a parameter.
-    let audio = new Audio (audioURL);
+    let audio = new Audio(audioURL);
     //Play method plays our audio sound.
     audio.play();
 }
 
 //This function utilizes HTML canvas to draw win lines.
-function drawWinLine (coordX1, coordY1, coordX2, coordY2) {
+function drawWinLine(coordX1, coordY1, coordX2, coordY2) {
     //this line accesses our HTML canvas element.
     const canvas = document.getElementById('win-lines');
     //This line gives us access to methods and properties to use on canvas.
@@ -179,7 +179,7 @@ function animateLineDrawing() {
     //This method moves us to a starting poin in our line.
     c.moveTo(x1, y1);
     //This method indicates the end point in our line.
-    c.lineto(x, y);
+    c.lineTo(x, y);
     //this method sets the color of our line.
     c.strokeStyle = 'rgba(70, 255, 33, .8)';
     //this method draws everything we laid out above.
@@ -215,7 +215,7 @@ function clear() {
 //This line disallows clicking while the win sound is playing
 disableClick();
 //this line plays the win sounds.
-audio('./media/winGame.mp3');
+audio('./Media/win_updated.mp3');
 //This line calls our main animation loop.
 animateLineDrawing();
 //This line waits 1 second. Then, clears canvas, resets game, and allows clicking again.
@@ -231,6 +231,6 @@ function resetGame() {
         square.style.backgroundImage = '';
     }
     //This selects our array so it empty and we can start over.
-    selected = [];
+    selectedSquares = [];
 }
 
